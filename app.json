@@ -23,6 +23,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7a132635-abd5-42b1-92e6-410e74bb4fc1"
+      }
+    },
+    "owner": "luizefb"
   }
 }
