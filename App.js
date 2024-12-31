@@ -18,12 +18,13 @@ export default class App extends Component {
   state={ ...estadoInicial }
 
   addDigit = n => {
-    if (n === ',' && this.state.displayValor.includes(',')) {
+    const limparDisplay = this.state.displayValor === '0'
+      || this.state.limparDisplay
+    
+    if (n === '.' && !limparDisplay && this.state.displayValor.includes('.')) {
       return
     }
 
-    const limparDisplay = this.state.displayValor === '0'
-      || this.state.limparDisplay
     const currentValor = limparDisplay ? '' : this.state.displayValor
     const displayValor = currentValor + n
     this.setState({ displayValor, limparDisplay: false })
@@ -54,11 +55,12 @@ export default class App extends Component {
 
       valores[1] = 0
       this.setState({
-        displayValor: valores[0],
+        displayValor: `${valores[0]}`,
         operation: igual ? null : operation,
         current: igual ? 0 : 1,
-        limparDisplay: !igual,
-        valores,
+        //limparDisplay: !igual,
+        limparDisplay: true,
+        valores
       })
     }
   }
@@ -86,7 +88,7 @@ export default class App extends Component {
           <Botao texto='+' onClick={() => this.setOperation('+')}/>
           <Botao texto='?'/>
           <Botao texto='0' cor='#000' onClick={() => this.addDigit(0)}/>
-          <Botao texto=',' cor='#000' onClick={() => this.addDigit(',')}/>
+          <Botao texto=',' cor='#000' onClick={() => this.addDigit('.')}/>
           <Botao texto='=' corFundo='#fe8715' cor='#FFF' onClick={() => this.setOperation('=')}/> 
         </View>
       </View>
