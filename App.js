@@ -65,13 +65,25 @@ export default class App extends Component {
     }
   }
 
+  delete = () => {
+    const { displayValor, limparDisplay, valores, current } = this.state;
+    if (limparDisplay || displayValor.length === 1) {
+      this.setState({ displayValor: '0', limparDisplay: false, valores: [0, 0], current: 0 });
+    } else {
+      const newDisplayValor = displayValor.slice(0, -1);
+      const newValores = [...valores];
+      newValores[current] = parseFloat(newDisplayValor) || 0;
+      this.setState({ displayValor: newDisplayValor, valores: newValores });
+    }
+  }
+
   render(){
     return (
       <View style={styles.container}>
         <Display valor={this.state.displayValor}/>
         <View style={styles.botoes}>
           <Botao texto='ac' onClick={this.limparMemoria}/>
-          <Botao texto='<'/>
+          <Botao texto='<' onClick={this.delete}/>
           <Botao texto='%' onClick={() => this.setOperation('%')}/>
           <Botao texto='÷' onClick={() => this.setOperation('/')}/>
           <Botao texto='7' cor='#000' onClick={() => this.addDigit(7)}/>
@@ -88,7 +100,7 @@ export default class App extends Component {
           <Botao texto='+' onClick={() => this.setOperation('+')}/>
           <Botao texto='?'/>
           <Botao texto='0' cor='#000' onClick={() => this.addDigit(0)}/>
-          <Botao texto=',' cor='#000' onClick={() => this.addDigit('.')}/>
+          <Botao texto='.' cor='#000' onClick={() => this.addDigit('.')}/>
           <Botao texto='=' corFundo='#fe8715' cor='#FFF' onClick={() => this.setOperation('=')}/> 
         </View>
       </View>

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableHighlight, Dimensions } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, Dimensions } from "react-native";
 
 export default props => {
     const coresDinamicas = {
@@ -8,11 +8,11 @@ export default props => {
     };
 
     return (
-        <TouchableHighlight onPress={props.onClick}>
+        <TouchableOpacity onPress={props.onClick}>
             <Text style={[styles.botao, coresDinamicas]}>
                 {props.texto}
             </Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
     )
 }
 
